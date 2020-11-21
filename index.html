@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<title> Among Us CYOA </title>	
+	<title></title>
+		
 </head>
 <style>
     table {
@@ -14,10 +15,6 @@
         margin-top:25%;
         width: 850px;
         height: 570px;
-
-    }
-    tr{
-        border: 1px solid black;
 
     }
     td {
@@ -38,25 +35,192 @@
         padding-left: 40px;
         width: 360px;
     }
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    a:focus, a:visited{
+        color: black;
+    }
   </style>
 
 <body style="background-color:#151719;">
-        <div class="tablediv">
-            <table background="Vote.png">
-                <tr><td class="topleft" onclick=playSound()><img src="bar.png"> </td><td class="top"><img src="bar.png"> </td></tr>
-                <tr><td class="left"><img src="bar.png"> </td><td><img src="bar.png"> </td></tr>
-                <tr><td class="left"><img src="bar.png"> </td><td><img src="bar.png"> </td></tr>
-                <tr><td class="left"><img src="bar.png"> </td><td><img src="bar.png"> </td></tr>
-                <tr><td class="left"><img src="bar.png"> </td><td><img src="bar.png"> </td></tr>
-                <tr></tr>
-            </table>
+        <div id="container" class="tablediv">
         </div>
 	<script>
+        function createTable(i, tbl, f, s, colour1, colour2){
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            if(i == 0)
+                td.setAttribute("class", "topleft");
+            else
+                td.setAttribute("class", "left");
+            tr.appendChild(td);
 
-        function playSound(url) {
-            var a = new Audio("https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a");
-            a.play();
+
+            let a = document.createElement("a");
+            a.setAttribute("target", "_blank");
+            a.setAttribute("href", f);
+            td.appendChild(a);
+            
+            let img = document.createElement("img");
+            img.setAttribute("src", "crunchbar_" + colour1 + ".png")
+            a.appendChild(img);
+
+            td = document.createElement("td");
+            if(i == 0)
+                td.setAttribute("class", "top");
+            tr.appendChild(td);
+
+            a = document.createElement("a");
+            a.setAttribute("target", "_blank");
+            a.setAttribute("href", s);
+            td.appendChild(a);
+            
+            img = document.createElement("img");
+            img.setAttribute("src", "crunchbar_" +  colour2 + ".png")
+            a.appendChild(img);
+
+            tbl.appendChild(tr)
+
         }
+        function goToRound(round){
+            let cont = document.getElementById("container")
+            cont.innerHTML = "";
+            let colours = ["yellow", "teal", "black", "white", "blue", "red", "purple", "pink", "green", "brown"]
+            let tbl = document.createElement("table");
+            tbl.setAttribute("background", "Vote.png");
+            let bd = document.createElement("tbody");
+            tbl.appendChild(bd);
+            let j = 0;
+            let alive = [true,true,true,true,true,true,true,true,true,true]
+            let audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+            switch(round){
+                case 1:
+                    j = 0;
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+                case 2:
+                    alive = [true,true,true,true,true,false,true,true,true,true]
+                    audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+                    j = 0;
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+                case 3:
+                    alive = [true,false,true,true,true,false,false,true,true,true]
+                    audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+                    j = 0;
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+                case 4:
+                    alive = [true,false,true,true,false,false,false,false,true,true]
+                    audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+                    j = 0;
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+                case 5:
+                    alive = [true,false,true,true,false,false,false,false,false,true]
+                    audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+                    j = 0;             
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+                case 6:
+                    alive = [true,false,false,true,false,false,false,false,false,true]
+                    audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a"];
+                    j = 0;         
+                    for(let i = 0; i < 5; i++){
+                        let ja = j++
+                        let ba = j++
+                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                    }
+                    break;
+
+            }
+            bd.appendChild(document.createElement("tr"))
+                cont.appendChild(tbl)
+        }
+
+        goToRound(1)
+
+
+
+
+
+
     </script>
 
 </body>
