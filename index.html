@@ -12,43 +12,72 @@
     table {
         margin-left:auto; 
         margin-right:auto;
-        margin-top:25%;
+        margin-top:5%;
         width: 850px;
         height: 570px;
-
     }
+
     td {
         height: 80px;
     }
+
+    img {
+        cursor: pointer;
+    }
+
     td.top{
         padding-top: 30px;
         height: 80px;
     }
+
     td.topleft{
         padding-top: 30px;
         background-repeat: no-repeat;
         padding-left: 40px;
         width: 360px;
     }
+
     td.left{
         background-repeat: no-repeat;
         padding-left: 40px;
         width: 360px;
     }
+    
     a {
         text-decoration: none;
         text-transform: uppercase;
     }
+
     a:focus, a:visited{
         color: black;
+    }
+    @font-face {
+        font-family: among;
+        src: url("amongfont.ttf");
+    }
+    .title {
+        margin-left:auto; 
+        margin-right:auto;
+        height: 150px;
+        width: 850px;
+    }
+    p {
+        text-align: center;
+        font-size: 50px;
+        color: white;
+        font-family: among;
     }
   </style>
 
 <body style="background-color:#151719;">
+        <div id="title" class="title">
+            <p>Welcome to The Among Us GWA Experience!</p>
+            <p>Click on each character to listen to their introduction</p>
+        </div>
         <div id="container" class="tablediv">
         </div>
 	<script>
-        function createTable(i, tbl, f, s, colour1, colour2){
+        function createTable(round, i, tbl, f, s, colour1, colour2){
             let tr = document.createElement("tr");
             let td = document.createElement("td");
             if(i == 0)
@@ -56,6 +85,9 @@
             else
                 td.setAttribute("class", "left");
             tr.appendChild(td);
+            let p = document.getElementById("text")
+            if(p)
+                p.innerText = "Round " + (round-1)
 
 
             let a = document.createElement("a");
@@ -95,8 +127,8 @@
             let j = 0;
             let alive = [true,true,true,true,true,true,true,true,true,true]
             let audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
-                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
-                                  "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
+                                  "https://media.soundgasm.net/sounds/810a0a12a322415617d010fc4f364ff6f70942b1.m4a",
+                                  "https://soundgasm.net/u/Lustful_Crunch/notme",
                                   "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
                                   "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
                                   "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
@@ -110,10 +142,16 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
                 case 2:
+                    title = document.getElementById("title")
+                    title.innerHTML = ""
+                    let p = document.createElement("p")
+                    p.setAttribute("id", "text")
+                    title.appendChild(p)
+
                     alive = [true,true,true,true,true,false,true,true,true,true]
                     audios = ["https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
                                   "https://media.soundgasm.net/sounds/039ad0bee23e4034a427fdf2a7190222ecc82cc9.m4a",
@@ -129,7 +167,7 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
                 case 3:
@@ -148,7 +186,7 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
                 case 4:
@@ -167,7 +205,7 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
                 case 5:
@@ -186,7 +224,7 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
                 case 6:
@@ -205,23 +243,29 @@
                     for(let i = 0; i < 5; i++){
                         let ja = j++
                         let ba = j++
-                        createTable(i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
+                        createTable(round, i, bd, audios[ja], audios[ba], (alive[ja] ? "" : "dead_") + colours[ja] , (alive[ba] ? "" : "dead_") + colours[ba] );
                     }
                     break;
+                case 7:
+
 
             }
-            bd.appendChild(document.createElement("tr"))
-                cont.appendChild(tbl)
+            let trr = document.createElement("tr")
+            if (round < 7){
+                let rr = document.createElement("img")
+                rr.setAttribute("src", "bar.png")
+                rr.style.marginLeft = "50%"
+                rr.onclick = () => goToRound(round+1)
+                trr.appendChild(rr)
+            }
+            else {
+                let p = document.getElementById("text")
+                p.innerText = "Thank you for Playing!"
+            }
+            bd.appendChild(trr)
+            cont.appendChild(tbl)
         }
-
         goToRound(1)
-
-
-
-
-
-
     </script>
-
 </body>
 </html>
