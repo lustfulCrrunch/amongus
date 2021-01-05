@@ -80,10 +80,14 @@
         function createTable(round, i, tbl, f, s, colour1, colour2){
             let tr = document.createElement("tr");
             let td = document.createElement("td");
-            if(i == 0)
+            if(i == 0){
                 td.setAttribute("class", "topleft");
-            else
+                td.setAttribute("id", "td");
+            }
+            else{
                 td.setAttribute("class", "left");
+                td.setAttribute("id", "td");
+            }
             tr.appendChild(td);
             let p = document.getElementById("text")
             if(p)
@@ -259,8 +263,36 @@
                 trr.appendChild(rr)
             }
             else {
+                let a = document.createElement("a");
+                a.setAttribute("target", "_blank");
+                a.setAttribute("href", "https://soundgasm.net/u/TheLadyLair/FF4M-Among-Us-Crew-Victory");
+                let img = document.createElement("img");
+                img.setAttribute("src", "Green.png")
+                img.style.height = "100px"
+                img.style.marginLeft = "50px"
+                a.appendChild(img);
+                let b = document.createElement("a");
+                b.setAttribute("target", "_blank");
+                b.setAttribute("href", "https://soundgasm.net/u/BraveryAudios/Bravery-Green-Winning");
+                img = document.createElement("img");
+                img.setAttribute("src", "Brown.png")
+                img.style.height = "100px"
+                img.style.marginLeft = "50px"
+                b.appendChild(img);
+                let c = document.createElement("a");
+                c.setAttribute("target", "_blank");
+                c.setAttribute("href", "https://soundgasm.net/u/BraveryAudios/Bravery-Green-Winning");
+                img = document.createElement("img");
+                img.setAttribute("src", "Blue.png")
+                img.style.height = "100px"
+                img.style.marginLeft = "50px"
+                c.appendChild(img);
+
                 let p = document.getElementById("text")
-                p.innerText = "Thank you for Playing!"
+                p.innerText = "Listen, then vote for the imposter!"
+                trr.appendChild(a)
+                trr.appendChild(b)
+                trr.appendChild(c)
             }
             bd.appendChild(trr)
             cont.appendChild(tbl)
